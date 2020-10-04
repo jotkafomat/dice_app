@@ -10,17 +10,20 @@ describe Game do
 
   it { is_expected.to respond_to(:roll_dice).with(1).argument }
 
-  it 'records each dice roll' do
+  it 'keeps a record of each dice roll' do
     new_game = Game.new
+    initial_record_count = new_game.dice_records.size
     new_game.roll_dice
-    expect(new_game.dice_records.size).to eq (1)
+    expect(new_game.dice_records.size).to eq (initial_record_count + 1)
   end
 
-  it 'shows a current score' do
+  it 'shows a cummulative score' do
     new_game = Game.new
 
-    expected_score = [new_game.roll_dice, new_game.roll_dice, new_game.roll_dice].flatten.sum
-    
-    expect(new_game.score).to eq (expected_score)
+    allow(new_game).to receive(:rand).and_return(5)
+
+    3.times { new_game.roll_dice }
+
+    expect(new_game.score).to eq (15)
   end
 end
