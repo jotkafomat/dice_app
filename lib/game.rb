@@ -5,10 +5,13 @@ class Game
     end
   def roll_dice(count = 1)
     roll = 1.upto(count).collect{rand(1..6)}
-    @dice_records.push(roll)
+    add_to_record(roll)
     roll
   end
   def score
     @dice_records.flatten.sum
+  end
+  def add_to_record(roll)
+    @dice_records.push(roll)
   end
 end

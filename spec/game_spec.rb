@@ -1,8 +1,7 @@
-require 'game.rb'
+require './lib/game.rb'
 describe Game do
-  it 'is able to roll a dice' do
-    expect(subject).to respond_to(:roll_dice)
-  end
+
+  it { is_expected.to respond_to(:roll_dice).with(1).argument }
 
   it 'rolls a dice and get a number between 1 and 6' do
     expect(subject.roll_dice.first).to be_between(1, 6).inclusive
